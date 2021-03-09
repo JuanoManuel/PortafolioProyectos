@@ -1,0 +1,361 @@
+<!doctype html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<html>
+<head>
+  <title>Algoritmo de Dijkstra</title>
+
+  <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+  <script src="dist/vis.js"></script>
+  <link href="dist/vis-network.min.css" rel="stylesheet" type="text/css" />  
+  <link href="main.css" rel="stylesheet" type="text/css" />  
+
+        <script type="text/javascript">
+        var nodes, edges, network;
+        var lista_nodos=[];
+        var lista_edges=[]; 
+        var inicio, final,num_nodos,num;
+        var edge_id=1;
+        var ruta,i;
+/*************************************************************************************************************************/
+        function addNode() {
+             num=document.getElementById('node-label').value;
+            try {
+                for (var i=1; i<=num;i++) {
+                  var l=(i).toString();
+                  nodes.add({
+                    id:(i),
+                    label:l,
+                    color: '#66a3ff'
+                  });
+                  lista_nodos.push(i);
+                }
+         ////Creamos el arreglo de acuerdo al numero de nodos que ingresamos/////////  
+          num_nodos=lista_nodos.length+1
+        for (var i = 0; i <num_nodos; i++){
+             lista_edges[i]=new Array(3);
+            }
+        for ( var i = 0; i < num_nodos; i++ ) {
+            for ( var j = 0; j < num_nodos; j++ ){
+                 lista_edges[i][j]=0;
+                }
+        }       
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+     function updateNode1(identif) {//Colorear el nodo camino
+            try {
+                nodes.update({
+                    id:identif,
+                    label:identif,
+                     color:{background:'#00ff00'} 
+                });
+                //sleep(1000);
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+           function updateNode2(identif) {//Regresar al color azul
+            try {
+                nodes.update({
+                    id:identif,
+                    label:identif,
+                    color:{background:'#66a3ff'}
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+/*************************************************************************************************************************/
+        function addEdge() {
+            try {
+                lista_edges[document.getElementById('edge-from').value][document.getElementById('edge-to').value]=parseInt(document.getElementById('edge-costo').value);
+                edges.add({
+                    id:edge_id,
+                    from: document.getElementById('edge-from').value,
+                    to: document.getElementById('edge-to').value,
+                    label: document.getElementById('edge-costo').value
+                });
+                edge_id++;
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+        function removeEdge() {
+            try {
+                edges.remove({id: document.getElementById('edge-id').value});
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+             
+/*************************************************************************************************************************/
+        function draw() {
+            // creamos un arreglo de los nodos
+            nodes = new vis.DataSet();                    
+            // creamos un arreglo de las aristas
+            edges = new vis.DataSet();           
+            // creamos el Network
+            var container = document.getElementById('network');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {};
+            network = new vis.Network(container, data, options);
+
+        }
+        function sleep(milliseconds) {
+  var start = new Date().getTime();
+  for (var i = 0; i < 1e7; i++) {
+    if ((new Date().getTime() - start) > milliseconds){
+      break;
+    }
+  }
+}
+/*************************************************************************************************************************/
+       
+//        console.log();
+//Pasamos el nodo de inicio y el nodo final
+//Nodo en el que comienza
+//Nodo en el que termina
+//lista_edges // arreglo bidimensional donde esta guardado cada uno de los enlaces
+//num_nodos el numero de nodos 
+function dijkstra(lista_edges, num_nodos, inicio, final) {
+inicio=document.getElementById('origen').value;//Nodo en el que comienza
+final= document.getElementById('destino').value;//Nodo en el que termina
+/*************************************************************************************************************************/
+       /*console.log();    document.write();*/
+ //Actualizamos
+for (var i =1; i <num_nodos; i++) {
+     updateNode2(i);
+}
+ /* nodo inicial entre 0 y N - 1 */
+   if ( inicio < 0 || final > num_nodos - 1 ){
+    return;
+   }
+   /* nodo final entre 0 y N - 1 */
+   if ( final < 0 || final > num_nodos - 1 ){
+    return;
+   }
+
+   /*
+ document.write("Matriz de adyacencia"+"<br/><br/>");
+   for ( var i = 1; i<num_nodos; i++ ) {
+      for ( var j = 0; j<num_nodos; j++ ){
+                document.write(lista_edges[i][j]);
+            }
+         document.write("<br/>");
+   }
+   */
+function label(numero,previo,peso,marca) {
+  this.numero = numero;
+  this.previo = previo;
+  this.peso = peso;
+  this.marca=marca
+}
+/////////////////////COMIENZO ALGORITMO DE DIJKSTRA
+ var peso;
+ var i,j,k, costo_total;
+
+
+var labels=[];
+/* inicializar las etiquetas de nodo */
+  for ( i = 0; i < num_nodos; i++) {
+         labels[i]=new label();
+
+      labels[i].numero = i+1;
+      if ( i != inicio ) {
+         labels[i].previo = -1;   /* aún no se ha definido predecesor */
+         labels[i].peso = -1;   /* infinito */
+         labels[i].marca = 0;
+      }
+      else {
+         labels[i].previo = -1;   /* aún no se ha definido predecesor */
+         labels[i].peso = 0;        /* coste del nodo inicial a sí mismo es cero */
+         labels[i].marca = 0;
+      }
+   }
+console.log("num: ");
+console.log(num);   
+console.log("num_nodos: ");
+console.log(num_nodos);
+console.log("lista_nodos: ");
+console.log(lista_nodos);
+console.log("lista_edges: ");
+console.log(lista_edges);
+console.log("labels:")
+console.log(labels);
+
+
+     /* continuamos este ciclo mientras existan nodos no marcados */
+   while ( 1 ) {
+      /* busca entre todos los nodos no marcados el de menor peso, descartando los
+       * de peso infinito (-1) */
+      peso = -1;
+      i0 = -1;//bandera para terminar o no el proceso
+      for ( i = 0; i < num_nodos; i++ ) {
+         if ( labels[i].marca == 0 && labels[i].peso >= 0 )
+            if ( peso == -1 ) {
+               peso = labels[i].peso;
+               i0 = i;
+            }
+            else if ( labels[i].peso <= peso ) {
+               peso = labels[i].peso;
+               i0 = i;
+            }
+      }
+      if ( i0 == -1 ) { /* termina si no encuentra */
+     break;
+      }
+      /* actualiza el peso de todos los sucesores (si los hay) del nodo
+       * encontrado y luego señala dicho nodo como marcado */
+      for ( i = 0; i < num_nodos; i++ ) {
+
+         if ( lista_edges[i0][i] > 0 ) {
+            /* si el coste acumulado sumado al coste del enlace del nodo i0 al nodo i
+             * es menor al coste del nodo i (o si el coste del nodo i es infinito),
+             * debemos actualizar */
+            if ( labels[i].peso == -1 || labels[i0].peso + lista_edges[i0][i] < labels[i].peso ) {
+               labels[i].peso = labels[i0].peso + lista_edges[i0][i];
+               labels[i].previo = i0;
+            }
+         }
+      }
+      labels[i0].marca = 1;
+
+      /* pausa (opcional) */
+     // cout << "presione ENTER para continuar ...";
+      //cin.get();
+   }
+
+  /* Ruta desde el nodo 'a' hasta el nodo 'b' */
+   var longitud = 2;
+   i = final;
+   while ( ( i = labels[i].previo ) != inicio ){ longitud++;}    /* primero estimamos la longitud de la ruta */
+
+   if ( ( ruta=new Array(longitud) ) == null ) return;
+ 
+   ruta[longitud - 1] = final;      /* luego rellenamos */
+   i = final;
+   j = 0;
+   for ( j = 1; j < longitud; j++ ) {
+      i = labels[i].previo;
+      ruta[longitud - j - 1] = i;
+   }
+ var recorrido;
+ recorrido="Ruta mas corta entre nodo "+ inicio+" y nodo "+ final+":";
+ //document.write("<br/>"+"Ruta mas corta entre nodo "+ inicio+" y nodo "+ final+":"+"<br/><br/>")
+i=0;
+while(i<longitud){
+     setTimeout(updateNode1,2000,ruta[i]);
+i++;
+}
+
+  // for ( i = 0; i < longitud; i++ ) {
+    //document.write(ruta[i])
+   // updateNode1(ruta[i]);
+   
+    //  if ( i < longitud - 1 ) document.write(" - ");
+  // }
+   //document.write("<br/><br/>"+" Costo total: "+labels[final].peso+" <br/><br/>");
+}
+/*********************************************************************************************************************/    
+    </script>
+</head>
+<body onload="draw()">
+<h1>Añadir nodos y aristas</h1>
+<table>
+    <tr>
+        <td>
+            <h2>Nodo</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><label for="node-label">Número de nodos:</label></td>
+                    <td><input id="node-label" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Acción</td>
+                    <td>
+                        <button id="node-add" onclick="addNode();">Add</button>
+                        <button id="node-remove" onclick="removeNode();">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <h2>Arista</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-from">Origen:</label></td>
+                    <td><input id="edge-from" type="text" value="1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-to">Destino:</label></td>
+                    <td><input id="edge-to" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-costo">Costo:</label></td>
+                    <td><input id="edge-costo" type="text" value="4"></td>
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td>Acción</td>
+                    <td>
+                        <button id="edge-add" onclick="addEdge();">Add</button>
+                        <button id="edge-remove" onclick="removeEdge();">Remove</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <h2>Origen y Destino</h2>
+            <table>
+                <tr>
+                    <td></td>
+
+                    <td><label for="origen">Nodo de origen: </label></td>
+                    <td><input id="origen" type="text" value="1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="destino">Nodo destino: </label></td>
+                    <td><input id="destino" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Generar camino</td>
+                    <td>
+                        <button id="dijkstra" onclick="dijkstra(lista_edges, num_nodos, inicio, final)">Aceptar</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+    </tr>         
+</table>
+    <tr>
+        <td>
+            <h2>Grafo</h2>
+
+            <div id="network"></div>
+        </td>
+    </tr>
+</table>
+</body>
+</html>
+

@@ -1,0 +1,407 @@
+<!doctype html>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+<html>
+<head>
+  <title>Algoritmo de Dijkstra</title>
+  <script src="dist/vis.js"></script>
+  <link href="dist/vis-network.min.css" rel="stylesheet" type="text/css" />  
+  <link href="main.css" rel="stylesheet" type="text/css" />  
+
+        <script type="text/javascript">
+        var nodes, edges, network;
+        var lista_nodos=[];
+        var lista_edges=[]; 
+        var labels=[];
+        var inicio, final,num_nodos,num, pasos;
+        var edge_id=1;
+        var ruta,i;
+        var contenido;
+        var aux1, aux2;
+        var pasos=1;
+/*************************************************************************************************************************/
+        function addNode() {
+             num=document.getElementById('node-label').value;
+            try {
+                for (var i=1; i<=num;i++) {
+                    var l=(i).toString();
+                    nodes.add({
+                    id:(i),
+                    label:l,
+                    color: '#66a3ff'
+                });
+                 lista_nodos.push(i);
+                }
+         ////Creamos el arreglo de acuerdo al numero de nodos que ingresamos/////////  
+          num_nodos=lista_nodos.length+1;
+        for (var i = 0; i <num_nodos; i++){
+             lista_edges[i]=new Array(3);
+            }
+        for ( var i = 0; i < num_nodos; i++ ) {
+            for ( var j = 0; j < num_nodos; j++ ){
+                 lista_edges[i][j]=0;
+                }
+        }
+        num_filas(num_nodos);//////////////////////////////////////////////DEFINIMOS EL NUMERO DE FILAS DE LA TABLA FINAL       
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+
+     function updateNode1(identif) {//Colorear el nodo camino
+            try {
+                nodes.update({
+                    id:identif,
+                    label:identif,
+                     color:{background:'#00ff00'} 
+                });
+                //sleep(1000);
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+           function updateNode2(identif) {//Regresar al color azul
+            try {
+                nodes.update({
+                    id:identif,
+                    label:identif,
+                    color:{background:'#66a3ff'}
+                });
+            }
+            catch (err) {
+                alert(err);
+            }
+        }
+/*************************************************************************************************************************/
+        function addEdge() {
+            try {
+                lista_edges[document.getElementById('edge-from').value][document.getElementById('edge-to').value]=parseInt(document.getElementById('edge-costo').value);
+
+                lista_edges[document.getElementById('edge-to').value][document.getElementById('edge-from').value]=parseInt(document.getElementById('edge-costo').value);
+                edges.add({
+                    id:edge_id,
+                    from: document.getElementById('edge-from').value,
+                    to: document.getElementById('edge-to').value,
+                    label: document.getElementById('edge-costo').value
+                });
+                edge_id++;
+            }
+            catch (err) {
+                alert(err);
+            }
+        }        
+/*************************************************************************************************************************/
+        function draw() {
+            // creamos un arreglo de los nodos
+            nodes = new vis.DataSet();                    
+            // creamos un arreglo de las aristas
+            edges = new vis.DataSet();           
+            // creamos el Network
+            var container = document.getElementById('network');
+            var data = {
+                nodes: nodes,
+                edges: edges
+            };
+            var options = {};
+            network = new vis.Network(container, data, options);
+        }
+/*************************************************************************************************************************/
+        function num_filas(num_nodos) {
+        var table = document.getElementById("myTable");
+          for(var i=0; i<num_nodos; i++)
+           {
+              var row = table.insertRow(-1);
+            var cell1 = row.insertCell(0);
+            if(i==0){
+             cell1.innerHTML ="Nodo";
+            }
+            else{
+              cell1.innerHTML =i;
+            }
+           }
+        }
+/*************************************************************************************************************************/
+
+/*************************************************************************************************************************/  
+function wait(nsegundos) {
+objetivo = (new Date()).getTime() + 1000 * Math.abs(nsegundos);
+while ( (new Date()).getTime() < objetivo );
+}
+
+//Pasamos el nodo de inicio y el nodo final
+//Nodo en el que comienza
+//Nodo en el que termina
+//lista_edges // arreglo bidimensional donde esta guardado cada uno de los enlaces
+//num_nodos el numero de nodos 
+function dijkstra(lista_edges, num_nodos,inicio,final) {
+
+var inicio=1;
+var final=num_nodos-1;
+pasos=1
+/*************************************************************************************************************************/
+       /*console.log();    document.write();*/
+ //Actualizamos
+
+ /* nodo inicial entre 0 y N - 1 */
+   if ( inicio < 0 || final > num_nodos - 1 )
+    {return;}
+   /* nodo final entre 0 y N - 1 */
+   if ( final < 0 || final > num_nodos - 1 )
+   {return;}
+
+
+function label(numero,previo,peso,marca) {
+  this.numero = numero;
+  this.previo = previo;
+  this.peso = peso;
+  this.marca=marca
+}
+/////////////////////COMIENZO ALGORITMO DE DIJKSTRA
+ var peso;
+ var i,j,k, costo_total;
+/* inicializar las etiquetas de nodo */
+  for ( i = 0; i < num_nodos; i++) {
+         labels[i]=new label();
+
+      labels[i].numero = i+1;
+      if ( i != inicio ) {
+         labels[i].previo = -1;   /* aún no se ha definido predecesor */
+         labels[i].peso = -1;   /* infinito */
+         labels[i].marca = 0;
+      }
+      else {
+         labels[i].previo = -1;   /* aún no se ha definido predecesor */
+         labels[i].peso = 0;        /* coste del nodo inicial a sí mismo es cero */
+         labels[i].marca = 0;
+      }
+   }
+     /* continuamos este ciclo mientras existan nodos no marcados */
+   while ( 1 ) {
+      /* busca entre todos los nodos no marcados el de menor peso, descartando los
+       * de peso infinito (-1) */
+      peso = -1;
+      i0 = -1;//bandera para terminar o no el proceso
+      for ( i = 0; i < num_nodos; i++ ) {
+         if ( labels[i].marca == 0 && labels[i].peso >= 0 )
+            if ( peso == -1 ) {
+               peso = labels[i].peso;
+               i0 = i;
+            }
+            else if ( labels[i].peso <= peso ) {
+               peso = labels[i].peso;
+               i0 = i;
+            }
+      }
+      if ( i0 == -1 ) { /* termina si no encuentra */
+     break;
+      }
+      /* actualiza el peso de todos los sucesores (si los hay) del nodo
+       * encontrado y luego señala dicho nodo como marcado */
+      for ( i = 0; i < num_nodos; i++ ) {
+
+         if ( lista_edges[i0][i] > 0 ) {
+            /* si el coste acumulado sumado al coste del enlace del nodo i0 al nodo i
+             * es menor al coste del nodo i (o si el coste del nodo i es infinito),
+             * debemos actualizar */
+            if ( labels[i].peso == -1 || labels[i0].peso + lista_edges[i0][i] < labels[i].peso ) {
+               labels[i].peso = labels[i0].peso + lista_edges[i0][i];
+               labels[i].previo = i0;
+            }
+         }
+      }
+      labels[i0].marca = 1;
+        //wait(1);
+      /* pausa (opcional) */
+     // cout << "presione ENTER para continuar ...";
+      //cin.get();
+    //  document.write("   [ nodo "+i0+" marcado ]"+"<br/>");
+      /* para verificar, imprime los costes calculados hasta el momento */
+      for(var i=0; i<num_nodos; i++)
+         {
+      var Row = document.getElementById("myTable").rows[i];
+      var x =Row.insertCell(-1);
+      if(i==0){
+      x.innerHTML ="Paso: "+(pasos);
+        }
+      else if(i>0){
+
+         if ( labels[i].peso == -1 ) {
+              aux1="Inf";
+         }
+         else {aux1=labels[i].peso;}
+
+          aux2=", "+labels[i].previo;
+
+         if ( labels[i].marca == 1 )
+               contenido=", x";
+         else{contenido=" ";}
+      x.innerHTML =aux1+aux2+contenido;
+      }
+         }
+      pasos++;
+   }
+   inicio=0;
+   final=0;
+}
+/*************************************************************************************************************************/
+function calcular_ruta(inicio,final){
+  for (var i =1; i <num_nodos; i++)
+{updateNode2(i);}
+   /* Ruta desde el nodo 'a' hasta el nodo 'b' */
+inicio=document.getElementById('origen').value;//Nodo en el que comienza
+final= document.getElementById('destino').value;//Nodo en el que termina
+
+console.log(inicio);
+console.log(final);
+console.log("labels:")
+console.log(labels);
+   var longitud = 2;
+   i = final;
+
+   while ( ( i = labels[i].previo ) != inicio ){ longitud++;}    /* primero estimamos la longitud de la ruta */
+
+   if ( ( ruta=new Array(longitud) ) == null ) return;
+   ruta[longitud - 1] = final;      /* luego rellenamos */
+   i = final;
+   j = 0;
+   for ( j = 1; j < longitud; j++ ) {
+      i = labels[i].previo;
+      ruta[longitud - j - 1] = i;
+   }
+   for ( i = 0; i < longitud; i++ ) {
+    updateNode1(ruta[i]);
+  }
+  document.getElementById("demo").innerHTML =labels[final].peso;
+}
+/*********************************************************************************************************************/    
+    </script>
+</head>
+<body onload="draw()">
+  <p>
+ Algoritmo de Dijkstra, también llamado algoritmo de caminos mínimos, es un algoritmo para la determinación del camino más corto, dado un vértice origen, hacia el resto de los vértices en un grafo que tiene pesos en cada arista. Su nombre alude a Edsger Dijkstra, científico de la computación de los Países Bajos que lo describió por primera vez en 1959.
+</p>
+
+<h1>Añadir nodos y aristas</h1>
+<table>
+    <tr>
+        <td>
+            <h2>Nodo</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><label for="node-label">Número de nodos:</label></td>
+                    <td><input id="node-label" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button id="node-add" onclick="addNode();">Añadir</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td></td><td></td>
+        <td>
+            <h2>Arista</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-from">Origen:</label></td>
+                    <td><input id="edge-from" type="text" value="1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-to">Destino:</label></td>
+                    <td><input id="edge-to" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="edge-costo">Costo:</label></td>
+                    <td><input id="edge-costo" type="text" value="4"></td>
+                </tr>
+
+
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>
+                        <button id="edge-add" onclick="addEdge();">Añadir</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+<td></td><td></td>
+        <td>
+            <h2>Calcular tabla</h2>
+            <table>
+                <tr>
+                        <button id="dijkstra" onclick="dijkstra(lista_edges, num_nodos, inicio,final);">Aceptar</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td></td><td></td><td></td><td></td><td></td>
+        <td>
+            <h2>Origen y Destino</h2>
+            <table>
+                <tr>
+                    <td></td>
+
+                    <td><label for="origen">Nodo de origen: </label></td>
+                    <td><input id="origen" type="text" value="1"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><label for="destino">Nodo destino: </label></td>
+                    <td><input id="destino" type="text" value="2"></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td>Generar camino</td>
+                    <td>
+                        <button id="calcular_ruta" onclick="calcular_ruta(inicio,final);">Aceptar</button>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td></td><td></td>
+        <td>
+            <h2>Costo de la ruta:</h2>
+            <table>
+                <tr>
+                    <td></td>
+                    <td><p id="demo"></p></td>
+                </tr>
+
+
+            </table>
+        </td>
+
+    </tr>         
+</table>
+   <table class="view">
+    <colgroup>
+        <col width="30%">
+        <col width="70%">
+    </colgroup>
+    <tr>
+        <td>
+            <h2>Tabla</h2>
+            <div id="tabla"></div>
+           <table id="myTable"  border="2">
+          </table>
+          <br>
+      </td>
+        <td>
+            <h2>Grafo</h2>
+
+            <div id="network"></div>
+        </td>
+    </tr>
+</table>
+
+</body>
+</html>
+

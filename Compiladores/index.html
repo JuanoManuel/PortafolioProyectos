@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AFN</title>
+    <link rel="stylesheet" type="text/css" href="css/vis.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/estilos.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="row justify-content-around align-items-center">
+                <div class="col-3"><img src="img/ipn.png" class="img-fluid"></div>
+                <div class="col-auto"><h3>Instituto Politecnico Nacional</h3><br><h3>Escuela Superior de Cómputo</h3></div>
+                <div class="col-2"><img src="img/logoescom.png" class="img-fluid"></div>
+            </div>
+        </div>
+    </header>
+    <div class="container mt-3 p-3">
+        <div class="row justify-content-center mb-1"><div class="col text-center"><h1>Generador de automatas AFN/AFD</h1></div></div>
+        <div class="row justify-content-start align-items-center mb-2 pl-2 pr-2">
+            <div class="col-auto">
+                <label for="inputRegla">Expresión regular:</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" name="inputRegla" id="inputRegla" class="form-control">
+            </div>
+            <div class="col-auto">
+                <button id="btnGenerarAutomata" class="btn btn-block btn-primary">Generar automata</button>
+            </div>
+            <div class="col-auto">
+              <label for="inputCadena">Cadena:</label>
+            </div>
+            <div class="col-auto">
+                <input type="text" name="inputCadena" id="inputCadena" class="form-control">
+            </div>
+            <div class="col-auto">
+                <button id="btnEvaluarCadena" class="btn btn-block btn-primary">Evaluar cadena</button>
+            </div>
+        </div>
+        <div class="row pl-2 pr-2">
+	        <div class="col-9">
+                <div id="contenedor"></div>
+            </div>
+            <div class="col-3">
+                <div class="row botones">
+                    <div class="col-12"><button id="btnNuevo" data-toggle="modal" class="btn btn-secondary btn-block">AFN nuevo</button></div>
+                    <div class="col-12"><button id="btnUnion" data-toggle="modal" class="btn btn-secondary btn-block">Unir</button></div>
+                    <div class="col-12"><button id="btnConcatenar" data-toggle="modal" class="btn btn-secondary btn-block">Concatenar</button></div>
+                    <div class="col-12"><button id="btnCerraduraPositiva" data-toggle="modal" class="btn btn-secondary btn-block">Cerradura positiva</button></div>
+                    <div class="col-12"><button id="btnCerraduraKleene" data-toggle="modal" class="btn btn-secondary btn-block">Cerradura Kleene</button></div>
+                    <div class="col-12"><button id="btnOpcional" data-toggle="modal" class="btn btn-secondary btn-block">Opcional</button></div>
+                    <div class="col-12"><button id="btnBorrar" data-toggle="modal" class="btn btn-danger btn-block">Borrar</button></div>
+                    <div class="col-12"><button id="btnAFD" data-toggle="modal" class="btn btn-warning btn-block">Convertir a AFD</button></div>
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputTablaAFD">
+                            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputTablaAFD">Cargar tabla AFD</label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="input-group mb-3">
+                          <div class="custom-file">
+                            <input type="file" class="custom-file-input" id="inputGramatica">
+                            <label class="custom-file-label" for="inputGroupFile02" aria-describedby="inputGramatica">Cargar gramatica</label>
+                          </div>
+                        </div>
+                    </div>
+                    <div class="col-12"><button id="btnLR0" data-toggle="modal" class="btn btn-success btn-block">Tabla LR0</button></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!--Modal template-->
+    <div class="modal fade" id="templateModal" tabindex="-1" role="dialog" aria-labelledby="templateModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="templateModalLabel">titulo</h5>
+            <button id="cerrarModal" type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="btnSubmit" class="btn btn-success">nada</button>
+            <button id='btnUnirTodo' style="display: none;" class='btn btn-success'>Unir todos los automatas</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!--Modal para mostrar tabla AFD-->
+    <div id="modalTablaAFD" class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog" aria-labelledby="modalTablaAFD" aria-hidden="true">
+      <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="templateModalLabel">Tabla AFD</h5>
+                <button id="cerrarModalAFD" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <table id="tablaAFD" class="table">
+                <thead class="thead-dark">
+
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+    <div id="modalTablaLR0" class="modal fade bd-example-modal-md" tabindex="-1" role="dialog" aria-labelledby="modalTablaLR0" aria-hidden="true">
+      <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="templateModalLabel">Tabla LR0</h5>
+                <button id="cerrarModalLR0" type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+              <table id="tablaLR0" class="table">
+                <thead class="thead-dark">
+
+                </thead>
+                <tbody>
+
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+    </div>
+	<script type="text/javascript" src="scripts/jquery.js"></script>
+    <script type="text/javascript" src="scripts/popper.min.js"></script>
+	<script type="text/javascript" src="scripts/bootstrap.js"></script>
+	<script type="text/javascript" src="scripts/vis.min.js"></script>
+    <script type="text/javascript" src="scripts/Queue.js"></script>
+    <script type="text/javascript" src="scripts/Transicion.js"></script>
+    <script type="text/javascript" src="scripts/Estado.js"></script>
+    <script type="text/javascript" src="scripts/AFN.js"></script>
+    <script type="text/javascript" src="scripts/AFD.js"></script>
+    <script type="text/javascript" src="scripts/Nodo.js"></script>
+    <script type="text/javascript" src="scripts/main.js"></script>
+    <script type="text/javascript" src="scripts/ListaDoble.js"></script>
+    <script type="text/javascript" src="scripts/AnalizadorSintactico.js"></script>
+    <script type="text/javascript" src="scripts/LR0.js"></script>
+</body>
+</html>

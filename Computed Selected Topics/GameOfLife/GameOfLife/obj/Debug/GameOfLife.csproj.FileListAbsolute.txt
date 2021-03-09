@@ -1,0 +1,33 @@
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csprojAssemblyReference.cache
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form1.resources
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Properties.Resources.resources
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.cache
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\Juan Manuel\source\repos\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form2.resources
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csprojAssemblyReference.cache
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form1.resources
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form2.resources
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Properties.Resources.resources
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.cache
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\juan_\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe.config
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.exe
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\bin\Debug\GameOfLife.pdb
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csprojAssemblyReference.cache
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form1.resources
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Form2.resources
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.Properties.Resources.resources
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.GenerateResource.cache
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.csproj.CoreCompileInputs.cache
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.exe
+C:\Users\Juan Manuel\OneDrive\Documentos\8vo semestre\Computed Selected Topics\GameOfLife\GameOfLife\obj\Debug\GameOfLife.pdb

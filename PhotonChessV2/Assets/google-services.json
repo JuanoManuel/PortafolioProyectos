@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "628671750676",
+    "firebase_url": "https://chesstesting-8d3ba-default-rtdb.firebaseio.com",
+    "project_id": "chesstesting-8d3ba",
+    "storage_bucket": "chesstesting-8d3ba.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:628671750676:android:83fc40031388df647a7d01",
+        "android_client_info": {
+          "package_name": "com.JuanoBananaz.PhotonChess"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "628671750676-9mm73juqaggfv13qmfogn5poq7l59amc.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB6bh02P9sl3een1ViP8yNAMfgnWQDjWlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "628671750676-9mm73juqaggfv13qmfogn5poq7l59amc.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

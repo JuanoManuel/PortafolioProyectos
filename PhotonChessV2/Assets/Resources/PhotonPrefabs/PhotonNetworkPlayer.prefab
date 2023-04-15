@@ -1,0 +1,111 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2714822365198370432
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 215145081253008550}
+  - component: {fileID: 4796147814508426025}
+  - component: {fileID: 1624025396253867125}
+  - component: {fileID: 7209087619822390203}
+  - component: {fileID: 5317092699261063244}
+  m_Layer: 0
+  m_Name: PhotonNetworkPlayer
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &215145081253008550
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714822365198370432}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4796147814508426025
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714822365198370432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  observableSearch: 2
+  Synchronization: 3
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &1624025396253867125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714822365198370432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f6c27fa46954b754b837386d6c1d91bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  platesContainer: {fileID: 0}
+  turnText: {fileID: 0}
+  winnerPanel: {fileID: 0}
+  winnerText: {fileID: 0}
+  plates:
+  - {fileID: 8088980218792454986, guid: 1bf7fc35a3a4ecf499c7751c34dc0316, type: 3}
+  - {fileID: 8476753414683555889, guid: dbbbca09b862bce4da912cf28b829dca, type: 3}
+  - {fileID: 2283702458743201927, guid: 73d9c0a4191afe44fbbdb9997e161191, type: 3}
+  - {fileID: 3502448690049275436, guid: 96fe38f682de1ec48a25a9a3d03c6499, type: 3}
+  - {fileID: 3502448690049275436, guid: b70f2ca9539b95f4ea7814fc159504ad, type: 3}
+  - {fileID: 8088980218792454986, guid: f6e93e4ba30e2024db821c14812d5703, type: 3}
+  currentTurn: 
+  player: 
+  IsOnlineMatch: 0
+  IsBoardPlaced: 0
+  readyToPlay: 0
+--- !u!114 &7209087619822390203
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714822365198370432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 81d06285c70b79e48ac2bf9a567fa9f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  master: {fileID: 0}
+--- !u!114 &5317092699261063244
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2714822365198370432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c9ec1bbe4c354b4dba74051f2130080, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
